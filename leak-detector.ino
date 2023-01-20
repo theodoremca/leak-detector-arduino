@@ -175,51 +175,13 @@ void loop()
 
       // Making an HTTP POST request
       SerialMon.println("Performing HTTP POST request...");
-      StaticJsonDocument<200> doc;
+      DynamicJsonDocument doc(1024);
       doc["key1"] = "value1";
+      doc["key2"] = 5;   
+      doc["pressure"] = 39;
+      doc["id"] = "1";
+      doc["flowRate"] = 11;
 
-      StaticJsonDocument<512> doc;
-
-      for (int i = 0; i < 4; i++)
-      {
-        int pressure;
-        if (i == 0)
-        {
-          pressure = generateRandomNumber(39.0, 40.0);
-        }
-        else if (i == 1)
-        {
-          pressure = generateRandomNumber(38.0, doc["data"][i - 1]["pressure"]);
-        }
-        else
-        {
-          pressure = doc["data"][1]["pressure"];
-        }
-
-        int flow_rate;
-        if (i == 0)
-        {
-          flow_rate = generateRandomNumber(1.08, 1.10);
-        }
-        else if (i == 1)
-        {
-          flow_rate = generateRandomNumber(1.07, doc["data"][i - 1]["flow_rate"]);
-        }
-        else
-        {
-          flow_rate = doc["data"][1]["flow_rate"];
-        }
-
-        doc["data"][i]["pressure"] = pressure;
-        doc["data"][i]["flow_rate"] = flow_rate;
-        doc["data"][i]["index"] = i;
-        doc["data"][i]["id"] = String(i);
-      }
-
-      // Create a buffer to hold the JSON data
-      char json[200];
-      // Serialize the JSON data to the buffer
-      serializeJson(doc, json);
 
       client.print(String("POST ") + resource + " HTTP/1.1\r\n");
       client.print(String("Host: ") + server + "\r\n");
