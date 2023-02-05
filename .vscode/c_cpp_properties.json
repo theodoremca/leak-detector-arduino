@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "C:\\Users\theod\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\2.0.6\\cores\\esp32",
-                "C:\\Users\theod\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino",
+                "C:\\Users\theod\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino"
                
             ],
             "defines": [
@@ -19,7 +19,8 @@
                 "path": [
                     "${workspaceFolder}/**",
                     "${workspaceRoot}",
-                    "C:\\Program Files (x86)\\Arduino\\hardware\tools\\avr\\avr\\include",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\Wire\\src",
                     "C:\\Users\\theod\\Documents\\Arduino\\libraries\\TinyGSM-master\\src",
                     "C:\\Users\\theod\\Documents\\Arduino\\libraries\\ArduinoHttpClient-master\\src",
                     "C:\\Users\\theod\\Documents\\Arduino\\libraries\\AXP202X_Library-master\\src",

@@ -55,7 +55,6 @@ String apiKeyValue = "tPmAT5Ab3j7F9";
 
 #include <Wire.h>
 #include <TinyGsmClient.h>
-#include <ArduinoJson.h>
 
 #ifdef DUMP_AT_COMMANDS
 #include <StreamDebugger.h>
@@ -175,22 +174,36 @@ void loop()
 
       // Making an HTTP POST request
       SerialMon.println("Performing HTTP POST request...");
-      DynamicJsonDocument doc(1024);
-      doc["key1"] = "value1";
-      doc["key2"] = 5;   
-      doc["pressure"] = 39;
-      doc["id"] = "1";
-      doc["flowRate"] = 11;
+      int pressure0 = 40;
+      String id0 = "0";
+      float flow_rate0 = 1.1;
+      int index0 = 0;
 
+      int pressure1 = 38;
+      String id1 = "1";
+      float flow_rate1 = 1.0;
+      int index1 = 1;
+
+      int pressure2 = 38;
+      String id2 = "2";
+      float flow_rate2 = 1.0;
+      int index2 = 2;
+
+      int pressure3 = 37;
+      String id3 = "3";
+      float flow_rate3 = 0.9;
+      int index3 = 3;
+
+      String json = "{\"data\":[{\"pressure\":" + String(pressure0) + ",\"id\":\"" + id0 + "\",\"flow_rate\":" + String(flow_rate0) + ",\"index\":" + String(index0) + "},{\"id\":\"" + id1 + "\",\"pressure\":" + String(pressure1) + ",\"flow_rate\":" + String(flow_rate1) + ",\"index\":" + String(index1) + "},{\"index\":" + String(index2) + ",\"id\":\"" + id2 + "\",\"pressure\":" + String(pressure2) + ",\"flow_rate\":" + String(flow_rate2) + "},{\"index\":" + String(index3) + ",\"id\":\"" + id3 + "\",\"flow_rate\":" + String(flow_rate3) + ",\"pressure\":" + String(pressure3) + "}],\"readable_time\":\"2023-01-12T11:16:57.420318\"}";
 
       client.print(String("POST ") + resource + " HTTP/1.1\r\n");
       client.print(String("Host: ") + server + "\r\n");
       client.println("Connection: close");
       client.println("Content-Type: application/json");
       client.print("Content-Length: ");
-      client.println(measureJsonPretty(doc));
+      client.println(json.length());
       client.println();
-      serializeJsonPretty(doc, client);
+      client.print(json);
 
       unsigned long timeout = millis();
       while (client.connected() && millis() - timeout < 10000L)
